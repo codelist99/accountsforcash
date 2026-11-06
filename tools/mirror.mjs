@@ -34,7 +34,8 @@ function localize(html) {
     .replace(/<a href="\/cdn-cgi\/l\/email-protection#[^"]*"><span class="__cf_email__"[^>]*>[\s\S]*?<\/span><\/a>/gi, '<a href="mailto:support@kairostechnologylabs.com">support@kairostechnologylabs.com</a>')
     .replace(/<script data-cfasync="false" src="\/cdn-cgi\/scripts\/5c5dd728\/cloudflare-static\/email-decode\.min\.js"><\/script>/gi, '')
     .replace(/<p(?: class="exp")?><strong>Explodely Disclaimer:<\/strong>[\s\S]*?<\/p>/gi, '<p><strong>Order support:</strong> For refunds or payment assistance, email <a href="mailto:support@kairostechnologylabs.com">support@kairostechnologylabs.com</a>.</p>')
-    .replaceAll('href="https://help.explodely.com/support/tickets/new"', 'href="mailto:support@kairostechnologylabs.com"');
+    .replaceAll('href="https://help.explodely.com/support/tickets/new"', 'href="mailto:support@kairostechnologylabs.com"')
+    .replace('var pitchSeconds = 0;', 'var pitchSeconds = 1009;');
   for (const [from, to] of replacements) html = html.replaceAll(from, to);
   if (!html.includes('/assets/funnel.js')) html = html.replace(/<\/body>/i, '<script src="/assets/funnel.js" defer></script><script src="/assets/tracker.js" defer></script></body>');
   return html;
