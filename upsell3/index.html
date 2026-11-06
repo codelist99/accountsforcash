@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="https://accountsforcash.com/fbm/assets/favicon.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Your Order &middot; FBM</title>
+<script>document.documentElement.className+=' js';</script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#f2f3f5;color:#111;
+  font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+
+/* store header, the way a checkout's header looks */
+.top{display:flex;align-items:center;justify-content:space-between;max-width:520px;
+  margin:0 auto;padding:10px 16px;background:#fff;border-bottom:1px solid #e3e5e8}
+.logo{height:30px;width:auto;display:block}
+.sec{display:flex;align-items:center;gap:5px;font-size:12px;color:#5f6368}
+.sec svg{width:13px;height:13px;fill:#5f6368}
+
+.col{max-width:520px;margin:0 auto;background:#fff;padding:14px 16px 24px}
+
+/* reassurance first: the purchase went through */
+.paid{display:flex;align-items:center;gap:10px;background:#edf7f0;border:1px solid #c3e3cd;
+  border-radius:8px;padding:9px 12px;font-size:14px;color:#1d3b27}
+.paid b{color:#0f2a19}
+.tick{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:#1e8e3e;display:grid;place-items:center}
+.tick svg{width:16px;height:16px;fill:#fff}
+
+.expires{margin:10px 0 0;text-align:center;font-size:13px;color:#7a4a00;background:#fff5e0;
+  border-radius:6px;padding:6px 10px}
+.expires b{font-variant-numeric:tabular-nums}
+
+h1{margin:13px 0 6px;font-size:23px;line-height:1.22;font-weight:700;letter-spacing:-.01em}
+.why{margin:0 0 11px;font-size:15px;line-height:1.45;color:#3c4043}
+
+/* the add-on, as an item card */
+.item{display:flex;gap:12px;align-items:center;border:1px solid #dadce0;border-radius:10px;
+  padding:10px 12px 10px 8px}
+.item img{flex:0 0 auto;width:104px;height:auto}
+.it h2{margin:0 0 4px;font-size:16px;line-height:1.25;font-weight:700}
+.pr{margin:0 0 3px;display:flex;align-items:baseline;flex-wrap:wrap;gap:6px}
+.pr s{color:#80868b;font-size:14px}
+.pr b{font-size:22px;color:#b12704;font-weight:700}
+.save{font-size:11.5px;font-weight:700;color:#fff;background:#cc0c39;border-radius:3px;padding:2px 6px}
+.pop{margin:0;font-size:12.5px;color:#1e8e3e;font-weight:600}
+
+/* it joins the order they already placed */
+.sum{margin:10px 0 12px;font-size:14px}
+.sh{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#5f6368}
+.row{display:flex;justify-content:space-between;gap:10px;padding:4px 0;color:#3c4043}
+.row .ok{color:#1e8e3e;font-weight:600}
+.row.add{color:#111}
+.row.tot{border-top:1px solid #dadce0;margin-top:4px;padding-top:8px;font-weight:700;color:#111;font-size:15px}
+
+/* the button everybody already knows how to press */
+.buy{display:block;text-align:center;text-decoration:none;background:#ffd814;border:1px solid #fcd200;
+  color:#0f1111;border-radius:100px;padding:15px 12px;font-size:17px;font-weight:700;
+  box-shadow:0 2px 5px rgba(213,217,217,.6)}
+.buy:active{background:#f7ca00}
+.guar{margin:8px 0 0;text-align:center;font-size:12.5px;color:#5f6368}
+
+.more{margin-top:34px;border-top:1px solid #e3e5e8;padding-top:18px}
+.more h3{margin:0 0 8px;font-size:16px}
+.more ul{margin:0 0 18px;padding-left:20px;color:#3c4043;font-size:14.5px}
+.more li{margin-bottom:5px}
+.vid{max-width:400px;margin:0 auto}
+.play{display:block;width:100%;background:#fff;border:1px solid #dadce0;border-radius:8px;
+  padding:12px;font:600 14px/1.2 inherit;font-family:inherit;color:#1a73e8;cursor:pointer}
+.play span{margin-right:5px}
+
+.decline{display:block;text-align:center;margin:100px 0 2px;font-size:12.5px;color:#0b5eaa;line-height:1.4}
+
+@media (min-width:521px){ .col{border-left:1px solid #e3e5e8;border-right:1px solid #e3e5e8} }
+
+
+/* ---- the stake ---- */
+h1 .amt{color:#1e8e3e;white-space:nowrap}
+.it .sub{margin:0 0 4px;font-size:13.5px;color:#3c4043;line-height:1.35}
+.row .warn{color:#b06000;font-weight:600;white-space:nowrap}
+.row .warn:before{content:"\26A0\FE0E";margin-right:4px}
+
+/* ---- the six steps ---- */
+.six{margin:0 0 8px;padding-left:22px;color:#3c4043;font-size:14.5px}
+.six li{margin-bottom:5px}
+.sixnote{margin:0 0 18px;font-size:13.5px;color:#5f6368}
+
+
+/* ---- dangers: the "not covered" list people know from purchase protection ---- */
+.alert{border:1px solid #f1c3bd;background:#fdf2f1;border-radius:8px;padding:10px 12px 8px;margin:0 0 12px}
+.ah{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:14px;font-weight:700;color:#8a1c12}
+.ai{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#d93025;color:#fff;
+  display:grid;place-items:center;font:700 13px/1 Arial,Helvetica,sans-serif}
+.alert ul{list-style:none;margin:0;padding:0}
+.alert li{position:relative;padding:3px 0 3px 26px;font-size:14px;color:#5f2120;line-height:1.35}
+.alert li:before{content:"\2715";position:absolute;left:4px;top:3px;color:#d93025;font-weight:700}
+.alert li b{color:#a50e0e}
+
+/* ---- screen 2: locked in ---- */
+.locked{text-align:center;padding:10px 4px 4px}
+.lk{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#1e8e3e;
+  box-shadow:0 0 0 7px #e3f3e8;margin:6px 0 12px}
+.lk svg{width:32px;height:32px;fill:none;stroke:#fff;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.lk path{stroke-dasharray:1;stroke-dashoffset:0}
+.locked h1{margin:0 0 8px;font-size:23px}
+.locked p{margin:0 0 14px;font-size:15px;color:#3c4043}
+.gets{list-style:none;margin:0 0 6px;padding:12px 14px;background:#f6f8f9;border-radius:8px}
+.gets li{position:relative;padding:3px 0 3px 26px;font-size:14px;color:#202124}
+.gets li:before{content:"\2713";position:absolute;left:4px;top:3px;color:#1e8e3e;font-weight:700}
+.hold{margin:0 0 10px;text-align:center;font-size:13px;color:#7a4a00}
+.hold b,.guar b{font-variant-numeric:tabular-nums}
+.decline2{display:block;text-align:center;margin:100px 4px 4px;font-size:13px;color:#0b5eaa;line-height:1.4}
+.sum{margin-top:10px}
+
+
+/* ---- lead-in that ties the dangers to the fix ---- */
+.rec{margin:0 0 7px;font-size:15px;font-weight:700;color:#202124}
+
+/* ---- button with a subline ---- */
+.buy.two{padding:12px 12px 11px}
+.buy.two b{display:block;font-size:18px;line-height:1.25}
+.buy.two span{font-weight:500}
+.buy.two > span{display:block;margin-top:3px;font-size:13px;color:#3d3500}
+
+/* ---- screen 2 plays in: tick pops and draws, headline, then each item ---- */
+@keyframes lkPop{0%{transform:scale(0)}100%{transform:scale(1)}}
+@keyframes lkDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#s2.anim .lk{animation:lkPop .45s cubic-bezier(.2,1.6,.4,1) both}
+#s2.anim .lk path{animation:lkDraw .35s ease-out .3s both}
+#s2.anim .locked h1{animation:rise .4s ease .55s both}
+#s2.anim .locked p{animation:rise .4s ease .8s both}
+#s2.anim .gets{animation:rise .3s ease 1s both}
+#s2.anim .gets li{animation:rise .35s ease both}
+#s2.anim .gets li:nth-child(1){animation-delay:1.15s}
+#s2.anim .gets li:nth-child(2){animation-delay:1.5s}
+#s2.anim .gets li:nth-child(3){animation-delay:1.85s}
+#s2.anim .after{animation:rise .4s ease 2.2s both}
+@media (prefers-reduced-motion:reduce){
+  #s2.anim *,#s2.anim .lk,#s2.anim .after{animation:none !important}
+}
+
+/* small phones: keep the button on the first screen */
+@media (max-width:380px){
+  .col{padding:10px 14px 22px}
+  .paid{padding:7px 10px;font-size:13px}
+  .expires{margin-top:7px;padding:5px 8px;font-size:12.5px}
+  h1{margin:11px 0 5px;font-size:20px}
+  .why{margin-bottom:10px;font-size:14px;line-height:1.4}
+  .item{padding:8px 10px 8px 6px;gap:10px}
+  .item img{width:84px}
+  .it h2{font-size:15px}
+  .pr b{font-size:20px}
+  .sum{margin:9px 0 11px;font-size:13.5px}
+  .row{padding:3px 0}
+  .row.tot{padding-top:6px}
+  .buy{padding:13px 10px;font-size:16px}
+}
+
+@media (max-width:380px){
+  .alert{padding:8px 10px 6px;margin-bottom:10px}
+  .ah{margin-bottom:3px;font-size:13.5px}
+  .alert li{padding:2px 0 2px 24px;font-size:13.5px}
+  .rec{margin-bottom:5px;font-size:14px}
+}
+
+/* ================= status check (screen 0) ================= */
+@keyframes spin{to{transform:rotate(360deg)}}
+.scan{padding:22px 0 10px}
+.sh2{display:flex;align-items:center;gap:11px;margin:0 0 16px}
+.sh2 h1{margin:0;font-size:21px;line-height:1.25}
+.spin{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:3px solid #dadce0;
+  border-top-color:#1a73e8;animation:spin .8s linear infinite}
+.scan.done .spin{animation:none;border-color:#1e8e3e;background:#1e8e3e;position:relative}
+.scan.done .spin:after{content:"";position:absolute;left:5px;top:3px;width:5px;height:9px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.rows{list-style:none;margin:0 0 16px;padding:0;border:1px solid #dadce0;border-radius:10px;overflow:hidden}
+.rows li{display:flex;align-items:center;gap:11px;padding:14px;opacity:0;transform:translateY(6px);
+  transition:opacity .25s ease,transform .25s ease,background .25s ease}
+.rows li+li{border-top:1px solid #eceff1}
+.rows li.in{opacity:1;transform:none}
+.rows .ic{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2.5px solid #dadce0;
+  border-top-color:#1a73e8;animation:spin .7s linear infinite;position:relative}
+.rows .k{flex:1 1 auto;font-size:15px;color:#202124}
+.rows .v{flex:0 0 auto;font-size:14px;font-weight:700;opacity:0;transition:opacity .2s ease}
+.rows li.ok .ic{animation:none;border:0;background:#1e8e3e}
+.rows li.ok .ic:after{content:"";position:absolute;left:8px;top:4px;width:5px;height:10px;
+  border:solid #fff;border-width:0 2.4px 2.4px 0;transform:rotate(45deg)}
+.rows li.ok .v{opacity:1;color:#1e8e3e}
+.rows li.bad{background:#fdf2f1}
+.rows li.bad .ic{animation:none;border:0;background:#d93025}
+.rows li.bad .ic:after{content:"!";position:absolute;inset:0;display:grid;place-items:center;
+  color:#fff;font:700 14px/1 Arial,Helvetica,sans-serif}
+.rows li.bad .k{font-weight:700}
+.rows li.bad .v{opacity:1;color:#c5221f}
+.bar{height:6px;background:#eceff1;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#1a73e8;transition-property:width;transition-timing-function:linear}
+.scan.done .bar i{background:#1e8e3e}
+
+
+
+/* ---- side by side: now vs with it ---- */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #dadce0;border-radius:10px;
+  overflow:hidden;margin:0 0 13px}
+.cmp .side{padding:0 0 11px}
+.cmp .side+.side{border-left:1px solid #dadce0}
+.cmp .h{margin:0 0 9px;padding:9px 8px;text-align:center;
+  font:700 11.5px/1.2 Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.cmp .bad .h{background:#fdf2f1;color:#8a1c12}
+.cmp .good .h{background:#edf7f0;color:#1d3b27}
+.cmp ul{list-style:none;margin:0;padding:0 10px}
+.cmp li{position:relative;padding:3px 0 3px 20px;font-size:13.5px;line-height:1.35;color:#3c4043}
+.cmp .bad li:before{content:"\2715";position:absolute;left:2px;top:3px;color:#d93025;font-weight:700}
+.cmp .good li:before{content:"\2713";position:absolute;left:2px;top:3px;color:#1e8e3e;font-weight:700}
+.cmp .bad li b{color:#a50e0e}
+.cmp .good li b{color:#15692f}
+.note{margin:0 0 11px;font-size:13px;line-height:1.4;color:#5f6368;text-align:center}
+@media (max-width:380px){
+  .cmp li{font-size:12.5px;padding-left:18px}
+  .cmp .h{font-size:10.5px;padding:8px 5px}
+  .cmp ul{padding:0 7px}
+}
+
+/* ---- the channel, drawn ---- */
+.flow{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;
+  background:#fff;border:1px solid #f1c3bd;border-radius:10px;padding:16px 12px 10px;margin:12px 0 12px}
+.flow.safe{border-color:#c3e3cd}
+.flow .node{text-align:center;width:62px}
+.flow .node svg{display:block;margin:0 auto 5px;width:28px;height:28px;fill:#3c4043}
+.flow .node span{font:600 11px/1.25 Arial,Helvetica,sans-serif;color:#5f6368;display:block}
+.flow .wire{position:relative;height:30px}
+.flow .wire:before{content:"";position:absolute;left:0;right:0;top:14px;height:3px;
+  background:repeating-linear-gradient(90deg,#d93025 0 6px,transparent 6px 13px)}
+.flow.safe .wire:before{background:#1e8e3e;border-radius:2px}
+.flow .tag{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;gap:5px;white-space:nowrap;
+  background:#d93025;color:#fff;font:700 10.5px/1 Arial,Helvetica,sans-serif;
+  padding:6px 9px;border-radius:20px;box-shadow:0 0 0 4px #fff}
+.flow.safe .tag{background:#1e8e3e}
+.flow .tag svg{width:12px;height:12px;fill:#fff}
+.flow .cap{grid-column:1 / -1;margin:8px 0 0;text-align:center;font-size:12px;color:#8a1c12}
+.flow.safe .cap{color:#1d3b27}
+.stat{display:flex;align-items:center;gap:11px;background:#fdf2f1;border:1px solid #f1c3bd;
+  border-radius:10px;padding:10px 13px;margin:0 0 13px}
+.stat b{font:800 29px/1 Arial,Helvetica,sans-serif;color:#c5221f}
+.stat span{font-size:13.5px;line-height:1.35;color:#5f2120}
+@media (max-width:380px){
+  .flow{padding:13px 9px 8px;gap:5px}
+  .flow .node{width:54px}
+  .flow .tag{font-size:9.5px;padding:5px 7px}
+  .stat b{font-size:25px}
+}
+
+/* ================= at risk (screen 1) ================= */
+.risk{background:#fdf2f1;border:1px solid #f1c3bd;border-radius:10px;padding:16px 14px 10px;margin:14px 0 14px}
+.rk{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#d93025;color:#fff;
+  font:700 21px/1 Arial,Helvetica,sans-serif;box-shadow:0 0 0 6px #f9d9d6}
+.risk h1{margin:12px 0 5px;font-size:24px;line-height:1.2;color:#a50e0e}
+.risk h1 span{white-space:nowrap}
+.risk p{margin:0 0 7px;font-size:14.5px;color:#5f2120;line-height:1.4}
+.risk ul{list-style:none;margin:0;padding:0}
+.risk li{position:relative;padding:4px 0 4px 26px;font-size:14.5px;color:#5f2120;line-height:1.35}
+.risk li:before{content:"\2715";position:absolute;left:4px;top:4px;color:#d93025;font-weight:700}
+.risk li b{color:#a50e0e}
+
+/* screen 1 builds top to bottom */
+#s1.anim .rk{animation:lkPop .4s cubic-bezier(.2,1.6,.4,1) both}
+#s1.anim .risk h1{animation:rise .35s ease .25s both}
+#s1.anim .risk p{animation:rise .35s ease .55s both}
+#s1.anim .risk li{animation:rise .35s ease both}
+#s1.anim .risk li:nth-child(1){animation-delay:.9s}
+#s1.anim .risk li:nth-child(2){animation-delay:1.2s}
+#s1.anim .risk li:nth-child(3){animation-delay:1.5s}
+#s1.anim .rec{animation:rise .35s ease 2.05s both}
+#s1.anim .item{animation:rise .35s ease 2.3s both}
+#s1.anim #step1,#s1.anim > .guar{animation:rise .35s ease 2.6s both}
+@media (prefers-reduced-motion:reduce){
+  #s1.anim *,#s1.anim .rk{animation:none !important}
+  .rows li{transition:none}
+}
+@media (max-width:380px){
+  .risk{padding:13px 12px 8px}
+  .risk h1{font-size:21px;margin-top:9px}
+  .risk li{padding:3px 0 3px 24px;font-size:13.5px}
+  .risk p{font-size:13.5px}
+}
+
+/* the list grows as each row lands, instead of an empty box filling in */
+.rows li:not(.in){display:none}
+.rows li.in{animation:rise .25s ease both}
+#s0{min-height:calc(100vh - 51px)}
+
+/* ---- slower, softer timing (overrides the first pass) ---- */
+@keyframes riseSoft{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rows li.in{animation:riseSoft .6s cubic-bezier(.22,.61,.36,1) both}
+.rows .v{transition:opacity .45s ease}
+
+#s1.anim .rk{animation:lkPop .6s cubic-bezier(.2,1.5,.4,1) both}
+#s1.anim .risk h1{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) .45s both}
+#s1.anim .risk p{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) .95s both}
+#s1.anim .risk li{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) both}
+#s1.anim .risk li:nth-child(1){animation-delay:1.85s}
+#s1.anim .risk li:nth-child(2){animation-delay:2.25s}
+#s1.anim .risk li:nth-child(3){animation-delay:2.65s}
+#s1.anim .flow{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 1.2s both}
+#s1.anim .cmp{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 2.9s both}
+#s1.anim .rec{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 3.2s both}
+#s1.anim .item{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 3.55s both}
+#s1.anim .note{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 3.85s both}
+#s1.anim #step1,#s1.anim > .guar{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 4.1s both}
+
+#s2.anim .lk{animation:lkPop .6s cubic-bezier(.2,1.5,.4,1) both}
+#s2.anim .lk path{animation:lkDraw .5s ease-out .45s both}
+#s2.anim .locked h1{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) .9s both}
+#s2.anim .locked p{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 1.3s both}
+#s2.anim .flow{animation:riseSoft .6s cubic-bezier(.22,.61,.36,1) 1.6s both}
+#s2.anim .gets{animation:riseSoft .5s cubic-bezier(.22,.61,.36,1) 2s both}
+#s2.anim .gets li{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) both}
+#s2.anim .gets li:nth-child(1){animation-delay:2.2s}
+#s2.anim .gets li:nth-child(2){animation-delay:2.6s}
+#s2.anim .gets li:nth-child(3){animation-delay:3s}
+#s2.anim .after{animation:riseSoft .65s cubic-bezier(.22,.61,.36,1) 3.6s both}
+
+@media (prefers-reduced-motion:reduce){
+  .rows li.in,#s1.anim *,#s2.anim *,#s1.anim .rk,#s2.anim .lk,#s2.anim .after{animation:none !important}
+}
+.risk h1,.locked h1{text-wrap:balance}
+
+
+/* ---- footer, as on the control ---- */
+.foot{background:#333;color:#bbb;margin-top:400px;padding:16px 14px 190px;font-size:11px;line-height:1.6}
+.foot .links{text-align:center;margin-bottom:12px;font-size:12px}
+.foot .links a{color:#9fc8ea;text-decoration:underline;margin:0 5px;white-space:nowrap}
+.foot p{margin-bottom:8px}
+.foot strong{color:#ddd}
+.foot a{color:#9fc8ea}
+
+/* ---- downsell popup, as on the control ---- */
+.ds-back{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9998;overflow-y:auto;padding:26px 14px}
+.ds-back.open{display:block}
+.ds{position:relative;max-width:430px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.4)}
+.ds .x{position:absolute;top:7px;right:13px;z-index:2;color:#fff;font-size:27px;line-height:1;text-decoration:none;opacity:.85}
+.ds .warn{background:#c00;color:#fff;text-align:center;padding:13px 14px;font:bold 25px/1.1 Arial,Helvetica,sans-serif;letter-spacing:.02em}
+.ds .warn span{margin-right:7px}
+.ds .bd{padding:22px 20px 24px;text-align:center}
+.ds h3{margin:0 0 7px;font:bold 23px/1.25 Arial,Helvetica,sans-serif}
+.ds .guar{margin:0 0 18px;font-size:13.5px;color:#667485}
+.ds .cta{display:block;text-decoration:none;background:#2aa54a;border-bottom:4px solid #17722f;border-radius:9px;padding:19px 16px;color:#fff;font:bold 19px/1.25 Arial,Helvetica,sans-serif;animation:dsTilt 2.2s ease-in-out infinite;transform-origin:50% 50%}
+.ds .no{display:block;margin:34px 0 26px;font:bold 14px/1.4 Arial,Helvetica,sans-serif;color:#0b5eaa;text-align:center}
+@keyframes dsTilt{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.1deg)}75%{transform:rotate(1.1deg)}}
+
+
+/* ---- DPF footer, as on the live upsell ---- */
+footer{max-width:760px;margin:400px auto 0;padding:26px 20px 40px;border-top:1px solid #e3e5e8;
+  text-align:center;font-size:11.5px;line-height:1.55;color:#6b7580}
+footer p{margin:0 0 10px}
+footer a{color:#0b5eaa}
+footer .links{font-size:12px}
+.top .logo{height:34px}
+
+
+/* ================= downsell popups ================= */
+.dsp-back{position:fixed;inset:0;z-index:9999;background:rgba(10,12,16,.78);display:none;overflow-y:auto;padding:22px 14px}
+.dsp-back.open{display:block}
+.dsp{display:none;position:relative;max-width:420px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);animation:dspIn .35s cubic-bezier(.2,1.3,.4,1) both}
+.dsp.on{display:block}
+@keyframes dspIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.dsp .top{background:#d93025;color:#fff;text-align:center;padding:11px 14px;font:800 15px/1.2 Arial,Helvetica,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.dsp .x{position:absolute;top:6px;right:12px;color:#fff;font-size:26px;line-height:1;text-decoration:none;opacity:.85}
+.dsp .bd{padding:20px 20px 22px;text-align:center}
+.dsp .pi{width:64px;height:64px;border-radius:14px;margin:0 auto 10px;display:block}
+.dsp .nm{margin:0 0 6px;font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#5f6368}
+.dsp h3{margin:0 0 9px;font:800 23px/1.22 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:#111;text-wrap:balance}
+.dsp .why{margin:0 0 15px;font-size:15px;line-height:1.45;color:#3c4043}
+.dsp .px{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 6px}
+.dsp .px s{font:700 22px/1 Arial,Helvetica,sans-serif;color:#9aa0a6}
+.dsp .px b{font:900 44px/1 Arial,Helvetica,sans-serif;color:#1e8e3e;letter-spacing:-1px}
+.dsp .save{display:inline-block;margin:0 0 16px;background:#fff4d6;border:1px solid #f0cf8a;color:#8a5a00;
+  font:800 13px/1 Arial,Helvetica,sans-serif;letter-spacing:.04em;text-transform:uppercase;padding:7px 11px;border-radius:20px}
+.dsp .cta{display:block;text-decoration:none;background:linear-gradient(#34b84a,#239a37);border-bottom:4px solid #17722f;
+  border-radius:10px;padding:16px 14px 14px;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.25);animation:dspTilt 2.2s ease-in-out infinite}
+.dsp .cta b{display:block;font:900 19px/1.2 Arial,Helvetica,sans-serif}
+.dsp .cta span{display:block;margin-top:4px;font-size:13px;opacity:.95}
+@keyframes dspTilt{0%,100%{transform:rotate(0)}25%{transform:rotate(-1deg)}75%{transform:rotate(1deg)}}
+.dsp .gone{margin:12px 0 0;font-size:12.5px;color:#b06000}
+.dsp .no{display:block;margin:26px 0 0;font-size:13px;color:#5f6368;text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.dsp,.dsp .cta{animation:none}}
+
+
+footer a{white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="https://accountsforcash.com/fbm/assets/logo.png" alt="FBM" class="logo">
+  <span class="sec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1h1zm2 0h6V7a3 3 0 0 0-6 0v3z"/></svg>Secure checkout</span>
+</header>
+
+<main class="col">
+
+<!-- ================= SCREEN 0: status check =================
+     Every row is true for every visitor; the one open item is the step
+     they're on. -->
+<section id="s0">
+  <div class="scan" id="scan">
+    <div class="sh2"><h1 id="scanH">Checking your account payout speed&hellip;</h1></div>
+    <ul class="rows" aria-live="polite">
+      <li data-ok="1"><span class="ic" aria-hidden="true"></span><span class="k">FBM account</span><span class="v">Active</span></li>
+      <li data-ok="1"><span class="ic" aria-hidden="true"></span><span class="k">Earnings tracking</span><span class="v">Live</span></li>
+      <li data-ok="1"><span class="ic" aria-hidden="true"></span><span class="k">Payout method</span><span class="v">Connected</span></li>
+      <li data-ok="0"><span class="ic" aria-hidden="true"></span><span class="k">Payout speed</span><span class="v">Standard &mdash; 100 days</span></li>
+    </ul>
+    <div class="bar"><i id="scanBar"></i></div>
+  </div>
+</section>
+
+<!-- ================= SCREEN 1: the delay -> recommendation, no price ================= -->
+<section id="s1" hidden>
+
+  <div class="risk">
+    <span class="rk" aria-hidden="true">!</span>
+    <h1>Your account is on a <span>100-day hold</span>.</h1>
+    <p>Your FBM account was opened on the standard payout schedule. Everything it earns drops into
+      the payout queue and sits there until release day &mdash; someone else's date, not yours:</p>
+
+      <div class="flow">
+        <div class="node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 4v14h10V5H7zm5 15.2a.9.9 0 1 0 0 .02z"/></svg><span>Your account earns it</span></div>
+        <div class="wire"><span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm1 3v5.2l3.5 2.1-1 1.7L11 13V7h2z"/></svg>Held 100 days</span></div>
+        <div class="node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 5v2H2V7l10-5zM4 10h2.6v7H4v-7zm5.2 0h2.6v7H9.2v-7zm5.2 0H17v7h-2.6v-7zM2 19h20v3H2v-3z"/></svg><span>You get it</span></div>
+        <p class="cap">Standard schedule &mdash; released every 100 days, on their date</p>
+      </div>
+
+    <ul>
+      <li>Your account earns it this week and you <b>see it three months later</b></li>
+      <li>A hundred days of money you can <b>watch but not spend</b></li>
+      <li>Rent, gas and groceries <b>don't wait three months</b> &mdash; your money does</li>
+    </ul>
+  </div>
+
+  <div class="cmp">
+    <div class="side bad">
+      <p class="h">What you have now</p>
+      <ul>
+        <li>Paid <b>every 100 days</b></li>
+        <li>First payday: <b>day 100</b></li>
+        <li>Released on <b>their date</b></li>
+      </ul>
+    </div>
+    <div class="side good">
+      <p class="h">With Account Fast Track</p>
+      <ul>
+        <li>Paid in as little as <b>24 hours</b></li>
+        <li>First payday: <b>tomorrow</b></li>
+        <li>Released <b>as you earn it</b></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <p class="rec">That's why we built&hellip;</p>
+
+  <div class="item">
+    <img src="https://accountsforcash.com/fbm/assets/seal.png" alt="" width="84" height="84">
+    <div class="it">
+      <h2>Account Fast Track</h2>
+      <p class="sub">Takes your FBM account off the 100-day queue. What the account earns can be released in as little as 24 hours instead of 100 days.</p>
+      <p class="pop">One tap. Every payout your account makes after this one comes fast.</p>
+    </div>
+  </div>
+
+  <p class="note">Fast releases cost us more to run, so they are not switched on
+    by default. This is the one time we can add it to your FBM account.</p>
+
+  <a class="buy" href="#s2" id="step1">Yes, Fast Track My Account</a>
+
+</section>
+
+<!-- ================= SCREEN 2: locked in, price, confirm ================= -->
+<section id="s2" hidden>
+
+  <div class="locked">
+    <span class="lk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2L18.5 7.8" pathLength="1"/></svg></span>
+    <h1>Your first payday just moved to tomorrow.</h1>
+    <p>Account Fast Track is <b class="amt">reserved</b> for your FBM account. What it earns can be released in as little as 24 hours instead of waiting out the 100-day cycle.</p>
+  </div>
+
+      <div class="flow safe">
+        <div class="node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 4v14h10V5H7zm5 15.2a.9.9 0 1 0 0 .02z"/></svg><span>Your account earns it</span></div>
+        <div class="wire"><span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>Released in 24 hrs</span></div>
+        <div class="node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 5v2H2V7l10-5zM4 10h2.6v7H4v-7zm5.2 0h2.6v7H9.2v-7zm5.2 0H17v7h-2.6v-7zM2 19h20v3H2v-3z"/></svg><span>You get it</span></div>
+        <p class="cap">Fast &mdash; no 100-day queue, no waiting on their date</p>
+      </div>
+
+  <ul class="gets">
+    <li>Your account pays out in as little as 24 hours, not once every 100 days</li>
+    <li>No 100-day wait on money you have already made</li>
+    <li>Stays switched on for every payout your account makes after this one</li>
+  </ul>
+
+  <div class="after">
+    <div class="sum">
+      <div class="row"><span>Account payout speed &middot; 24 hours</span><span class="ok">Ready to switch on</span></div>
+    </div>
+
+    <p class="hold">We're holding your spot for <b class="cdT">5:00</b></p>
+
+    <!-- Explodely upsell 3: 958657524 -->
+    <a class="buy two" href="#purchase-upsell3">
+      <b>Yes, Fast Track My Account</b>
+      <span>30 Day Money Back Guarantee &mdash; $97 One Time</span>
+    </a>
+
+    <a class="decline2" id="dpfDecline" href="/upsell4">No, I'll wait the 100 days
+      for money I've already earned.</a>
+  </div>
+
+</section>
+
+</main>
+
+<div class="dsp-back" id="dspBack" role="dialog" aria-modal="true" aria-label="Special offer">
+  <div class="dsp on" data-stage="0">
+    <a href="#" class="x" data-dsp-close aria-label="Close">&times;</a>
+    <div class="top">Wait! Before you go</div>
+    <div class="bd">
+      <img class="pi" src="https://accountsforcash.com/fbm/assets/seal.png" alt="" width="64" height="64">
+      <p class="nm">Account Fast Track</p>
+      <h3>Wait &mdash; take your account off the 100-day hold for $40 less.</h3>
+      <p class="why">Your account pays out in as little as 24 hours instead of 100 days. Same upgrade, $57 instead of $97.</p>
+      <div class="px"><s>$97</s><b>$57</b></div>
+      <span class="save">You save $40</span>
+      <!-- Explodely upsell 3: 958657524 (coupon fbm-fast-57 = $40 off) -->
+      <a class="cta" href="#purchase-upsell3_downsell">
+        <b>Yes, Fast Track My Account For $57</b>
+        <span>One time &mdash; 30 day money back guarantee</span>
+      </a>
+      <p class="gone">This is the last time this price is shown.</p>
+      <a href="#" class="no" data-dsp-no>No thanks, I don't want this.</a>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <p><strong>Explodely Disclaimer:</strong> Explodely.com is the trusted gateway for <a href="https://accountsforcash.com/fbm/">https://accountsforcash.com/fbm/</a>. Explodely is a trademark of Explodely LLC, a US corporation located at 1317 Edgewater Drive Suite #4648, Orlando FL, 32804, United States and used by permission. Explodely&rsquo;s role as a gateway provider does not constitute an endorsement, approval or review of this product(s) or any claim, statement or opinion used in promotion of this product(s). If you aren&rsquo;t completely satisfied with your purchase, or need order support, please contact Explodely here: <a href="https://help.explodely.com/support/tickets/new">https://help.explodely.com/support/tickets/new</a></p>
+  <p>FBM is a private company. It is <strong>not</strong> a government agency and is not affiliated with, endorsed by, or connected to any government entity, bank or phone carrier.</p>
+  <p>Testimonials, case studies, and examples found on this page are not intended to represent or guarantee that anyone will achieve the same or similar results. Individual experiences are not typical. Some material on this site is dramatized and may use actors, synthetic voices or synthetic imagery. This site is not part of, or endorsed by, Facebook, Google, Snapchat, TikTok or any social media platform in any way.</p>
+  <p>Disclaimer: Nothing on this site is legal, tax or financial advice. The results achieved by any individuals mentioned are not indicative of future results. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited.</p>
+  <p style="margin:14px 0 10px">Copyright <span id="yr">2026</span> - FBM. All Rights Reserved.</p>
+  <div class="links">
+    <a href="https://accountsforcash.com/fbm/disclaimers/privacy.html">Privacy</a> - <a href="https://accountsforcash.com/fbm/disclaimers/terms.html">Terms</a> - <a href="https://accountsforcash.com/fbm/disclaimers/refund-policy.html">Refund Policy</a> - <a href="https://accountsforcash.com/fbm/disclaimers/earnings-disclaimer.html">Earnings Disclaimer</a> - <a href="https://accountsforcash.com/fbm/disclaimers/ftc-compliance.html">FTC Compliance</a> - <a href="https://accountsforcash.com/fbm/disclaimers/support.html">Support</a> - <a href="https://help.explodely.com/support/tickets/new">Order support</a>
+  </div>
+</footer>
+
+<script>
+
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var y = $('yr'); if (y) y.textContent = new Date().getFullYear();
+  var VARIANT = window.AB_VARIANT || 'fbm-u3c';
+
+  /* ---------- instrumentation ----------
+     Preview: localStorage + console. Production: sendBeacon('/api/ab'). */
+  /* ---------- instrumentation ----------
+     The split-test router injects window.abTrack and counts views and every
+     click itself, identically on all arms. The page only reports steps that
+     only it knows about (C's status check and screen-1 tap). */
+  function send(ev, meta){
+    if (ev === 'view' || ev === 'cta_click' || ev === 'decline_click') return;
+    if (window.abTrack) window.abTrack(ev, meta);
+  }
+
+  /* ---------- downsell popup ---------- */
+  var back=$('dsBack');
+  function openPopup(){ if (back){ back.classList.add('open'); back.scrollTop=0; } }
+  if (back) {
+    var shut=function(e){ if(e) e.preventDefault(); back.classList.remove('open'); };
+    var x=$('dsClose'); if (x) x.addEventListener('click', shut);
+    back.addEventListener('click', function(e){ if (e.target===back) shut(e); });
+    document.addEventListener('keydown', function(e){ if (e.key==='Escape') shut(); });
+  }
+
+  /* ---------- clicks ----------
+     Capture phase, so this runs before navigation. Tags the checkout URL
+     once so Explodely attributes the SALE to the arm, not just the click. */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('[data-ab]') : null;
+    if (!a) return;
+    if (a.id === 'declineLink' || a.classList.contains('diy') || a.classList.contains('js-decline')) {
+      e.preventDefault();
+      send('decline_click', a.classList.contains('diy') ? 'diy-option'
+                          : (a.closest('#s2') ? 'screen2' : 'link'));
+      openPopup();
+      return;
+    }
+    send('cta_click', a.getAttribute('data-ab'));
+  }, true);
+
+  /* ---------- five minute hold ---------- */
+  var KEY='fbm_up3_'+VARIANT+'_deadline', SPAN=5*60*1000, end=0;
+  try { end = parseInt(localStorage.getItem(KEY),10) || 0; } catch(e){}
+  if (end && (end <= Date.now() + 1000 || end - Date.now() > SPAN)) end = 0;
+  if (!end) { end = Date.now() + SPAN; try{ localStorage.setItem(KEY,String(end)); }catch(e){} }
+  var cds=document.querySelectorAll('#cdT,.cdT');
+  (function tick(){
+    var t = Math.floor(Math.max(0, end - Date.now())/1000), m = Math.floor(t/60), s = t%60;
+    for (var i=0;i<cds.length;i++) cds[i].textContent = m + ':' + (s<10?'0':'') + s;
+    setTimeout(tick, 1000);
+  })();
+
+  /* ---------- video on tap ----------
+     A VTurb player autoplaying below the fold on every visit costs plays and
+     bandwidth for people who never scroll to it. */
+  var pb=$('playBtn'), vid=$('vid');
+  if (pb && vid) pb.addEventListener('click', function(){
+    send('video_open');
+    vid.innerHTML = "";
+    var s=document.createElement('script'); s.src=""; s.async=true;
+    document.head.appendChild(s);
+  });
+
+  /* ---------- status check -> at risk -> locked in ----------
+     Screen 0 auto-advances; screens 1 and 2 build top to bottom so nobody
+     has to read a paragraph to follow it. Back from 2 returns to 1. */
+  var s0=$('s0'), s1=$('s1'), s2=$('s2'), go=$('step1');
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(n, play){
+    s0.hidden = n !== 0; s1.hidden = n !== 1; s2.hidden = n !== 2;
+    window.scrollTo(0,0);
+    var el = [s0,s1,s2][n];
+    el.classList.remove('anim');
+    if (play) { void el.offsetWidth; el.classList.add('anim'); }
+  }
+  function scan(){
+    show(0, false);
+    var box=$('scan'), rows=box.querySelectorAll('.rows li'), bar=$('scanBar'), i=0;
+    var STEP = still ? 120 : 1150;
+    bar.style.transitionDuration = (rows.length*STEP + 200) + 'ms';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.width='100%'; }); });
+    (function next(){
+      if (i >= rows.length) {
+        box.classList.add('done');
+        $('scanH').textContent = 'Payout check complete';
+        send('scan_done');
+        setTimeout(function(){ show(1, !still); }, still ? 300 : 1500);
+        return;
+      }
+      var r = rows[i++];
+      r.classList.add('in');
+      setTimeout(function(){ r.classList.add(r.getAttribute('data-ok') === '1' ? 'ok' : 'bad'); next(); }, STEP);
+    })();
+  }
+  if (s0 && s1 && s2 && go) {
+    go.addEventListener('click', function(e){
+      e.preventDefault();
+      send('step1_yes');
+      show(2, true);
+      try { history.pushState({s:2}, '', location.pathname + location.search + '#confirm'); } catch(x){}
+    });
+    window.addEventListener('popstate', function(){
+      if (location.hash === '#confirm') show(2, true); else show(1, false);
+    });
+    if (location.hash === '#confirm') show(2, true); else scan();
+  }
+
+
+  /* ---------- downsell popups ----------
+     Declining opens the first offer; each "no" moves to the next lower
+     offer, and the last "no" follows the original decline link. */
+  (function(){
+    var back = document.getElementById('dspBack'), dec = document.getElementById('dpfDecline');
+    if (!back || !dec) return;
+    var stages = back.querySelectorAll('.dsp'), at = 0;
+    function go(i){ stages[at].classList.remove('on'); at = i; stages[at].classList.add('on'); back.scrollTop = 0; }
+    function leave(){ window.location.href = dec.href; }
+    dec.addEventListener('click', function(e){
+      e.preventDefault(); send('downsell_open', '0');
+      back.classList.add('open'); go(0);
+    });
+    back.addEventListener('click', function(e){
+      var t = e.target;
+      if (t.closest('[data-dsp-no]') || t.closest('[data-dsp-close]')) {
+        e.preventDefault();
+        if (at < stages.length - 1) { send('downsell_open', String(at + 1)); go(at + 1); }
+        else leave();
+      } else if (t.closest('.cta')) {
+        send('downsell_yes', String(at));
+      }
+    });
+  })();
+
+  /* ---------- keep the order params on the way to upsell 2 ---------- */
+  var dec = document.getElementById('dpfDecline');
+  if (dec && location.search) {
+    try {
+      var u = new URL(dec.href), q = new URLSearchParams(location.search);
+      q.forEach(function(v, k){ if (!u.searchParams.has(k)) u.searchParams.set(k, v); });
+      dec.href = u.toString();
+    } catch (e) {}
+  }
+
+})();
+
+</script>
+<script src="/assets/funnel.js" defer></script><script src="/assets/tracker.js" defer></script></body></html>

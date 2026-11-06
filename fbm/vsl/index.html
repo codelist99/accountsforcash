@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<!-- FRONT END PRICE TEST: product is $99. The cid below sets what the buyer pays.
+     fbm-fe-19 = $19 | fbm-fe-27 = $27 | fbm-fe-37 = $37 | fbm-fe-47 = $47
+     Swap the cid AND the price shown in the copy together. -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FBM Disbursement Desk</title>
+<link rel="icon" href="https://accountsforcash.com/fbm/assets/favicon.png">
+
+<!-- ===== VTurb preload (Mike's player) ===== -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/6f49acda-9a31-4c06-8cd8-ee4a2fb166db/players/6aea052b0d6be8253f92aca2/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/6f49acda-9a31-4c06-8cd8-ee4a2fb166db/6aea05238b5388ff62b1dade/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#10202E; --ink-2:#1E3346; --body:#44596D; --muted:#788B9C;
+  --line:#E3E9EF; --bg:#F6F8FA; --card:#FFFFFF;
+  --accent:#E8562A; --accent-d:#C43F17;
+  --green:#159C60; --green-s:#E9F6F0;
+  --amber:#B5730B; --amber-s:#FFF6E5;
+  --red:#C8321E;
+  --bubble:#EEF2F6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);
+  font:15px/1.45 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;padding:0 0 28px}
+a{color:var(--accent)}
+
+/* ===== the post card ===== */
+.feed{width:100%;max-width:524px;margin:0 auto;
+  padding-left:max(0px,env(safe-area-inset-left,0px));
+  padding-right:max(0px,env(safe-area-inset-right,0px))}
+/* on a desktop screen the card opens up so the video is not stranded in a
+   phone-width column; the type scales with it so nothing looks undersized */
+@media (min-width:760px){
+  .feed{max-width:720px}
+  .post-text{font-size:17px}
+  .offer h2{font-size:25px}
+  .offer .lede{max-width:560px;font-size:16px}
+  .gets{max-width:520px}
+  .gets li{font-size:15.5px}
+  .btn{max-width:520px}
+  .under{max-width:560px;font-size:13.5px}
+}
+@media (min-width:1100px){
+  .feed{max-width:840px}
+  .post-text{font-size:18px}
+  .offer h2{font-size:28px}
+}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  margin:14px 0;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,46,.06)}
+
+.post-head{display:flex;align-items:center;gap:10px;padding:12px 14px 9px}
+.av{width:40px;height:40px;min-width:40px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:#fff;font-weight:800;
+  letter-spacing:-.02em;line-height:1;user-select:none}
+.av-brand{background:linear-gradient(145deg,#F2683C 0%,#E8562A 55%,#C43F17 100%);
+  font-size:14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.post-who{min-width:0}
+.post-name{display:flex;align-items:center;gap:5px;font-size:15px;font-weight:700;
+  color:var(--ink);line-height:1.25}
+.post-name .vf{width:14px;height:14px;flex:none;fill:var(--accent)}
+.post-meta{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--muted);
+  margin-top:1px}
+.post-meta svg{width:12px;height:12px;fill:currentColor;flex:none}
+.post-body{padding:0 14px 11px}
+.post-text{font-size:15px;line-height:1.45;color:var(--ink-2)}
+.post-text b{color:var(--ink);font-weight:700}
+
+/* ===== player + live bar ===== */
+/* white, not black: the VTurb player letterboxes its own frame, and a white
+   surround reads as part of the post instead of a black bar. */
+.stage{position:relative;background:#fff;line-height:0;font-size:0;
+  display:flex;justify-content:center}
+.stage > vturb-smartplayer{width:100%}
+.floats{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.fl{position:absolute;bottom:4%;font-size:21px;line-height:1;animation:fl 3.6s ease-out forwards}
+@keyframes fl{
+  0%{opacity:0;transform:translateY(0) scale(.55)}
+  14%{opacity:1;transform:translateY(-18px) scale(1)}
+  100%{opacity:0;transform:translateY(-78%) scale(1.12)}}
+
+.live-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:12.5px;
+  color:var(--body);background:#FAFCFD;border-bottom:1px solid var(--line);
+  border-top:1px solid var(--line)}
+.live-tag{display:inline-flex;align-items:center;gap:6px;background:#FDECE9;
+  color:#A82A18;font-weight:800;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;border-radius:4px;padding:3px 7px 3px 6px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#E3341C;
+  animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.live-bar b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.waitnote{margin:0;padding:9px 14px 0;font-size:12.5px;line-height:1.4;color:var(--muted)}
+.waitnote b{color:var(--ink-2);font-weight:700}
+
+/* ===== engagement + actions ===== */
+.eng{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 14px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.eng-l{display:flex;align-items:center;gap:6px;min-width:0}
+.rx{display:inline-flex;align-items:center}
+.rx span{display:inline-flex;align-items:center;justify-content:center;
+  width:19px;height:19px;border-radius:50%;background:#fff;font-size:11px;
+  box-shadow:0 0 0 1.5px #fff;margin-right:-5px}
+.rx span:last-child{margin-right:0}
+.rx .b{background:#1877F2}
+.rx .r{background:#E3341C}
+.rx .y{background:#F0A431}
+.eng-r{display:flex;gap:10px;min-width:0;overflow:hidden}
+.eng-r span{overflow:hidden;text-overflow:ellipsis}
+
+.acts{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.act{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 0;background:none;border:0;cursor:default;color:var(--body);
+  font:600 13.5px/1 Manrope,system-ui,sans-serif;white-space:nowrap}
+.act svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== comments ===== */
+.cm-wrap{padding:9px 14px 4px}
+.cm-sort{font-size:13.5px;font-weight:700;color:var(--ink);padding:2px 0 9px}
+.cm{display:flex;gap:8px;margin-bottom:11px;animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cm-av{width:32px;height:32px;min-width:32px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;
+  line-height:1;user-select:none}
+.cm-col{min-width:0}
+.bub{display:inline-block;max-width:100%;background:var(--bubble);border-radius:16px;
+  padding:7px 12px 8px}
+.bub-name{font-size:12.5px;font-weight:700;color:var(--ink)}
+.bub-text{font-size:14px;line-height:1.38;color:var(--ink-2);margin-top:2px;
+  overflow-wrap:break-word}
+.cm-meta{display:flex;gap:11px;font-size:11.5px;color:var(--muted);padding:3px 0 0 12px}
+.typing{display:flex;gap:8px;margin:0 0 10px}
+.ty-av{width:32px;height:32px;min-width:32px;border-radius:50%;background:var(--bubble)}
+.ty-b{display:flex;align-items:center;gap:4px;background:var(--bubble);
+  border-radius:16px;padding:12px 14px}
+.ty-d{width:6px;height:6px;border-radius:50%;background:#A9B8C6;animation:td 1.2s infinite}
+.ty-d:nth-child(2){animation-delay:.18s}
+.ty-d:nth-child(3){animation-delay:.36s}
+@keyframes td{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.cm-input{display:flex;align-items:center;gap:8px;padding:9px 14px 12px;
+  border-top:1px solid var(--line)}
+.ci-av{width:32px;height:32px;min-width:32px;border-radius:50%;background:var(--bubble);
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.ci-f{flex:1;min-width:0;background:var(--bubble);border:0;border-radius:16px;
+  padding:9px 13px;font:400 13.5px Manrope,system-ui,sans-serif;color:var(--muted)}
+
+/* ===== the reveal ====
+   VTurb owns this section: an Action Button on the player is configured with
+   CSS Type "Class" -> buy-sec, and VTurb un-hides it at the pitch. It stamps
+   display:none !important on load, so nothing here fights it for display. */
+.buy-sec{padding:0}
+.buy-sec.in{animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.offer{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:22px 18px 22px;margin:14px 0 0;text-align:center;
+  box-shadow:0 1px 2px rgba(16,32,46,.05),0 12px 30px rgba(16,32,46,.07)}
+.offer h2{margin:0 0 7px;font-size:22px;font-weight:800;color:var(--ink);
+  letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
+.offer .lede{margin:0 auto 18px;max-width:420px;font-size:14.5px;line-height:1.5;
+  color:var(--body)}
+
+.gets{list-style:none;margin:0 auto 20px;padding:0;max-width:420px;text-align:left}
+.gets li{position:relative;padding:9px 0 9px 30px;font-size:14.5px;line-height:1.45;
+  color:var(--ink-2);border-bottom:1px solid var(--line)}
+.gets li:last-child{border-bottom:0}
+.gets li::before{content:"";position:absolute;left:0;top:12px;width:19px;height:19px;
+  border-radius:50%;background:var(--green-s);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23159C60'%3E%3Cpath d='M9.6 16.7 5.4 12.5 4 13.9l5.6 5.6L20 9.1l-1.4-1.4z'/%3E%3C/svg%3E");
+  background-size:13px;background-repeat:no-repeat;background-position:center}
+
+.price{display:flex;align-items:baseline;justify-content:center;gap:9px;
+  flex-wrap:wrap;margin:0 0 6px}
+.price .was{font-size:16px;color:var(--muted);text-decoration:line-through}
+.price .amt{font-size:40px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.price .per{font-size:15px;font-weight:700;color:var(--body)}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--green);background:var(--green-s);
+  border-radius:999px;padding:5px 11px;margin-bottom:18px}
+
+.btn{display:block;width:100%;max-width:420px;margin:0 auto;
+  background:var(--accent);color:#fff;text-decoration:none;text-align:center;
+  border-radius:10px;padding:15px 18px;font-size:17.5px;font-weight:800;letter-spacing:-.01em;
+  box-shadow:0 5px 16px rgba(232,86,42,.3);transition:background .15s}
+.btn:hover{background:var(--accent-d)}
+.btn small{display:block;margin-top:4px;font-size:12.5px;font-weight:600;opacity:.92;
+  letter-spacing:0}
+
+/* Amazon-style buy button: yellow, dark label, and a slow pulse so it keeps
+   pulling the eye once the offer opens. Motion is dropped for anyone who has
+   asked the OS to reduce it. */
+.btn{background:#FFD814;color:#0F1111;border:1px solid #FCD200;
+  box-shadow:0 4px 14px rgba(0,0,0,.14);animation:btnPulse 2.1s ease-in-out infinite}
+.btn:hover{background:#F7CA00;color:#0F1111}
+.btn small{opacity:.78;color:#0F1111}
+@keyframes btnPulse{
+  0%,100%{transform:scale(1);box-shadow:0 4px 14px rgba(0,0,0,.14),0 0 0 0 rgba(255,216,20,.62)}
+  50%{transform:scale(1.022);box-shadow:0 6px 20px rgba(0,0,0,.17),0 0 0 13px rgba(255,216,20,0)}
+}
+@media (prefers-reduced-motion:reduce){.btn{animation:none}}
+.under{margin:13px auto 0;max-width:430px;font-size:12.5px;line-height:1.5;color:var(--muted)}
+
+.guar{display:flex;align-items:center;gap:12px;text-align:left;
+  background:var(--green-s);border:1px solid #BFE6D2;border-radius:10px;
+  padding:13px 15px;margin:18px auto 0;max-width:430px}
+.guar svg{flex:0 0 auto;width:30px;height:30px;fill:var(--green)}
+.guar p{margin:0;font-size:13.5px;line-height:1.45;color:#14402C}
+.guar b{color:#0E2F20}
+
+/* ===== footer ===== */
+footer{background:var(--ink);color:#9FB3C6;padding:26px 0 30px;margin-top:18px;
+  font-size:13px;line-height:1.65}
+footer .fwrap{width:100%;max-width:760px;margin:0 auto;padding:0 16px;text-align:center}
+footer p{margin:0 0 10px}
+footer a{color:#CBD9E6;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.links{margin-top:12px}
+.links a{margin:0 7px;white-space:nowrap;display:inline-block}
+.exp{font-size:11.5px;color:#73889D;margin-top:14px;text-align:left}
+
+@media (max-width:540px){
+  .feed{padding:0}
+  .card{border-radius:0;border-left:0;border-right:0;margin:0 0 0}
+  .offer{border-radius:0;border-left:0;border-right:0;margin-top:12px}
+}
+@media (max-width:390px){
+  .eng{padding:10px 12px;font-size:12px}
+  .eng-r{gap:8px}
+  .act{font-size:12.5px;gap:5px}
+  .price .amt{font-size:34px}
+  .btn{font-size:16px}
+  .guar{flex-direction:column;text-align:center;gap:8px}
+}
+</style>
+</head><body>
+
+<div class="feed">
+
+<div class="card">
+
+  <div class="post-head">
+    <div class="av av-brand">FBM</div>
+    <div class="post-who">
+      <div class="post-name">FBM Disbursement Desk
+        <svg class="vf" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.7 6.7-4 4a1 1 0 01-1.4 0l-2-2a1 1 0 111.4-1.4L7 8.6l3.3-3.3a1 1 0 111.4 1.4z"/></svg>
+      </div>
+      <div class="post-meta"><span id="postTime">17m</span> &middot;
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM3.1 7.4h2.3c.05-1.3.3-2.5.7-3.4a4.9 4.9 0 00-3 3.4zm2.3 1.2H3.1a4.9 4.9 0 003 3.4c-.4-.9-.65-2.1-.7-3.4zm1.2 0c.06 1.5.37 2.7.78 3.4.3.5.5.6.62.6s.33-.1.63-.6c.4-.7.72-1.9.78-3.4H6.6zm3.4-1.2c-.06-1.5-.37-2.7-.78-3.4-.3-.5-.5-.6-.62-.6s-.33.1-.63.6c-.4.7-.72 1.9-.78 3.4h2.8zm1.2 1.2c-.05 1.3-.3 2.5-.7 3.4a4.9 4.9 0 003-3.4h-2.3zm2.3-1.2a4.9 4.9 0 00-3-3.4c.4.9.65 2.1.7 3.4h2.3z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <div class="post-text"><b>An FBM account is registered in your name and $864.20
+      is being held on it.</b> The briefing below covers the one verification step
+      before a withdrawal can be authorized. Sound on &#128071;</div>
+  </div>
+
+  <div class="stage">
+    <div class="floats" id="floats" aria-hidden="true"></div>
+
+    <!-- ===== VTurb smartplayer ===== -->
+    <vturb-smartplayer id="vid-6aea052b0d6be8253f92aca2" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    <script type="text/javascript">
+      var s=document.createElement("script");
+      s.src="https://scripts.converteai.net/6f49acda-9a31-4c06-8cd8-ee4a2fb166db/players/6aea052b0d6be8253f92aca2/v4/player.js",
+      s.async=!0,document.head.appendChild(s);
+    </script>
+
+  </div>
+
+  <div class="live-bar">
+    <span class="live-tag"><i class="live-dot"></i>Live</span>
+    <span><b id="viewerCount">2,418</b> watching now</span>
+  </div>
+
+  <p class="waitnote" id="waiting"><b>Please watch the presentation.</b>
+     The button to unlock your account appears underneath the video when it reaches that part.</p>
+
+<section class="buy-sec" id="buy-sec" style="display:none" aria-hidden="true">
+
+  <div class="offer">
+    <h2>Unlock your FBM account</h2>
+
+    <ul class="gets">
+      <li>Your FBM account unlocked and registered in your name</li>
+      <li>Withdrawal and disbursement options inside the account</li>
+      <li>Account support by email, seven days a week</li>
+    </ul>
+
+
+    <a class="btn" href="/checkout?product=front">
+      Unlock My FBM Account
+      <small>$19 one time &middot; $864.20 balance held on the account</small>
+    </a>
+
+
+    <div class="guar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8 4 5.2v6c0 4.7 3.4 9.1 8 10.2 4.6-1.1 8-5.5 8-10.2v-6l-8-3.4Zm-1.3 14.4-3.5-3.5 1.5-1.5 2 2 5-5 1.5 1.5-6.5 6.5Z"/></svg>
+      <p><b>30 day money-back guarantee.</b> If you cannot access the account, ask inside
+         30 days and you get your $19 back. Refunds are handled by Explodely, who process
+         the order.</p>
+    </div>
+
+  </div>
+
+</section>
+
+  <div class="eng">
+    <div class="eng-l">
+      <span class="rx" aria-hidden="true">
+        <span class="b">&#128077;</span><span class="r">&#10084;</span><span class="y">&#128558;</span>
+      </span>
+      <span id="likeCount">3,104</span>
+    </div>
+    <div class="eng-r">
+      <span id="commentCount">614 comments</span>
+      <span id="shareCount">287 shares</span>
+    </div>
+  </div>
+
+  <div class="acts">
+    <button class="act" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z"/><path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg> Like</button>
+    <button class="act" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Comment</button>
+    <button class="act" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> Share</button>
+  </div>
+
+  <div class="cm-wrap">
+    <div class="cm-sort">Most relevant</div>
+    <div id="feed"></div>
+    <div class="typing" id="typing" aria-hidden="true">
+      <div class="ty-av"></div>
+      <div class="ty-b"><i class="ty-d"></i><i class="ty-d"></i><i class="ty-d"></i></div>
+    </div>
+  </div>
+
+  <div class="cm-input">
+    <div class="ci-av" aria-hidden="true">&#128100;</div>
+    <input type="text" class="ci-f" placeholder="Write a comment..." readonly tabindex="-1" aria-hidden="true">
+  </div>
+
+</div><!-- /card -->
+
+<!-- ======================= THE REVEAL =======================
+     Hidden until the presentation reaches the offer. VTurb's Action Button
+     owns it (CSS Type "Class" -> buy-sec); ?reveal=true forces it open for QA. -->
+
+</div><!-- /feed -->
+
+<footer><div class="fwrap">
+  <p>FBM is a private company. It is not a government agency and is not affiliated with,
+     endorsed by, or connected to any government entity, bank or phone carrier.</p>
+  <p>This page and this presentation are not part of, affiliated with, or endorsed by
+     Facebook or Meta Platforms, Inc. in any way.</p>
+  <p>Questions about the product: <a href="/cdn-cgi/l/email-protection#f791959ab787859e98859e838e8482878798858381d98d92999392849cd994989a"><span class="__cf_email__" data-cfemail="7315111e3303011a1c011a070a000603031c0107055d09161d171600185d101c1e">[email&#160;protected]</span></a></p>
+
+  <p class="exp"><strong>Explodely Disclaimer:</strong> Explodely.com is the trusted gateway for
+     <a href="https://accountsforcash.com/fbm/">https://accountsforcash.com/fbm/</a>. Explodely is a
+     trademark of Explodely LLC, a US corporation located at 1317 Edgewater Drive Suite #4648,
+     Orlando FL, 32804, United States and used by permission. Explodely&rsquo;s role as a gateway
+     provider does not constitute an endorsement, approval or review of this product(s) or any
+     claim, statement or opinion used in promotion of this product(s). If you aren&rsquo;t completely
+     satisfied with your purchase, or need order support, please contact Explodely here:
+     <a href="https://help.explodely.com/support/tickets/new">https://help.explodely.com/support/tickets/new</a></p>
+
+  <p class="links">
+    <a href="https://accountsforcash.com/fbm/disclaimers/privacy.html">Privacy</a>&middot;
+    <a href="https://accountsforcash.com/fbm/disclaimers/terms.html">Terms</a>&middot;
+    <a href="https://accountsforcash.com/fbm/disclaimers/refund-policy.html">Refund Policy</a>&middot;
+    <a href="https://accountsforcash.com/fbm/disclaimers/earnings-disclaimer.html">Earnings Disclaimer</a>&middot;
+    <a href="https://accountsforcash.com/fbm/disclaimers/ftc-compliance.html">FTC Compliance</a>&middot;
+    <a href="https://accountsforcash.com/fbm/disclaimers/support.html">Support</a>&middot;
+    <a href="https://help.explodely.com/support/tickets/new">Order support</a>
+  </p>
+  <p>&copy; 2026 FBM. All rights reserved.</p>
+</div></footer>
+
+<!-- ===== the live post: counts, floating reactions, comment feed ===== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  'use strict';
+
+  /* ---- comment pool: ordinary people reacting to a live video.
+     Amounts are deliberate and sit either side of the $864.20 on the post, so
+     the feed corroborates the headline instead of competing with it. Jagged
+     figures only - round numbers read as invented.
+     REPLACE-TESTIMONIALS: illustrative examples, swap for approved copy before
+     cold traffic. ---- */
+  var POOL = [
+    "is mine already unlocked or do i gotta do the verify part first",
+    "listening. can you go back over the withdrawal part one more time",
+    "my husband thinks ive lost my mind but i got the laptop out on the counter",
+    "my sister had hers disbursed back in the spring. never said one word to me",
+    "THAT part about why nobody tells you. yep.",
+    "good morning from Michigan",
+    "how long does this run, i gotta get my grandson at 3",
+    "phone only or can i do it on the desktop",
+    "im 72 and no good with any of this so please go slow",
+    "someone holler when he gets to the unlock part, im making lunch",
+    "ok that answered mine. thank you",
+    "been burned before so im watching this one close",
+    "my daughters coming by later to help me set it up",
+    "does the disbursement go to the bank or do they mail it",
+    "missed the start, is there a replay",
+    "finally somebody explains it in plain english",
+    "button hasnt showed up on mine yet",
+    "he said it comes up later on. keep watching",
+    "one per person or can my wife do one too",
+    "writing the steps down so i dont forget em",
+    "retired in march. every bit helps now",
+    "is there a phone number if i get stuck",
+    "Alabama here",
+    "say that last part again please",
+    "i dont follow the account part, anybody?",
+    "slow but im keeping up",
+    "anything else to pay after the 19",
+    "my neighbor told me about this last week and i didnt believe her",
+    "65 and i still cant work this phone right",
+    "does this work in canada",
+    "glad i caught this one live",
+    "hes answered 2 of my questions already. good man",
+    "im gonna read it all over before i commit to anything",
+    "my eyes arent what they used to be, is there bigger print anywhere",
+    "evening all",
+    "sounds like hes straight with people for once",
+    "do you need any experience at all for this",
+    "wife is watching this with me",
+    "been on a fixed income 11 years now",
+    "all states or only certain ones",
+    "the part about picking how its sent, go over that again",
+    "sorry to ask twice, im just careful these days",
+    "thank you that was clear",
+    "how soon after you unlock it does it actually move",
+    "my son set my phone up so i should be ok",
+    "Texas. 70 years young",
+    "no rush no pressure, i like that",
+    "GOD BLESS YOU for taking the time with us",
+    "whats a disbursement exactly",
+    "mine says pending. is that normal"
+  ];
+
+  var NAMES = ['Yvonne Baptiste','Dee Ann Kovacs','Marlene Oduya','Patrice Hollan',
+    'Rosa Villaseca','Nell Crabtree','Joanne Pike','Tessa Romanov','Bev Okafor',
+    'Cindy Lou Marchetti','Heather Sandoval','Elaine Prescott','Monique Dalby',
+    'Kimberly Ruiz','Faye Tillotson','Grace Nwosu','Angie Petrauskas','Sharon Delgado',
+    'Al Buckmire','Ron Szabo','Duane Phillipe','Marvin Oyelaran','Clint Bergeron',
+    'Hector Salas','Pete Vandenberg','Tony Marchisio','Lamar Whitfield','Stu Pennington',
+    'Owen Gallardo','Benny Krause','Victor Amadi','Dennis Liang','Rodney Beauchamp',
+    'Carl Stubbs','Jamal Ferreira'];
+
+  var AV = ['#E8562A','#C43F17','#159C60','#1E3346','#B5730B','#3A5DA8','#7A4FB5',
+            '#0F6F8C','#C8321E','#6B7FA0','#176B4D','#8C3A5A'];
+
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function initials(n){
+    var p = n.split(' ');
+    return ((p[0]||'')[0] || '') + ((p[p.length-1]||'')[0] || '');
+  }
+  function hash(s){ var h=0,i; for(i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0;} return Math.abs(h); }
+
+  /* ---- comment feed ---- */
+  var feed   = document.getElementById('feed');
+  var typing = document.getElementById('typing');
+  var order  = [];
+  var used   = {};
+  var cursor = 0;
+
+  (function shuffle(){
+    var i, j, t;
+    for (i = 0; i < POOL.length; i++) { order.push(i); }
+    for (i = order.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random()*(i+1));
+      t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+  })();
+
+  function nextName(){
+    var n, guard = 0;
+    do { n = pick(NAMES); guard++; } while (used[n] && guard < 60);
+    used[n] = 1;
+    return n;
+  }
+
+  function render(text, name, mins){
+    var row = document.createElement('div');
+    row.className = 'cm';
+
+    var av = document.createElement('div');
+    av.className = 'cm-av';
+    av.style.background = AV[hash(name) % AV.length];
+    av.textContent = initials(name).toUpperCase();
+
+    var col = document.createElement('div');
+    col.className = 'cm-col';
+
+    var bub = document.createElement('div');
+    bub.className = 'bub';
+    var nm = document.createElement('div');
+    nm.className = 'bub-name';
+    nm.textContent = name;
+    var tx = document.createElement('div');
+    tx.className = 'bub-text';
+    tx.textContent = text;
+    bub.appendChild(nm); bub.appendChild(tx);
+
+    var meta = document.createElement('div');
+    meta.className = 'cm-meta';
+    ['' + mins + 'm', 'Like', 'Reply'].forEach(function(s){
+      var sp = document.createElement('span'); sp.textContent = s; meta.appendChild(sp);
+    });
+
+    col.appendChild(bub); col.appendChild(meta);
+    row.appendChild(av); row.appendChild(col);
+    feed.appendChild(row);
+  }
+
+  function addComment(){
+    if (!feed) { return; }
+    var text = POOL[order[cursor % order.length]];
+    cursor++;
+    render(text, nextName(), Math.floor(Math.random()*18) + 1);
+    if (typing) { typing.style.display = 'flex'; }
+  }
+
+  function seed(){
+    if (!feed) { return; }
+    var i;
+    for (i = 0; i < 3; i++) {
+      render(POOL[order[cursor % order.length]], nextName(), 26 - i*6 + Math.floor(Math.random()*4));
+      cursor++;
+    }
+  }
+
+  function commentLoop(){
+    addComment();
+    window.setTimeout(commentLoop, 6000 + Math.random()*6000);
+  }
+
+  /* ---- drifting counts ---- */
+  function counters(){
+    var viewers = 2418, likes = 3104, comments = 614, shares = 287;
+    var vEl = document.getElementById('viewerCount');
+    var lEl = document.getElementById('likeCount');
+    var cEl = document.getElementById('commentCount');
+    var sEl = document.getElementById('shareCount');
+
+    function paint(){
+      if (vEl) { vEl.textContent = viewers.toLocaleString(); }
+      if (lEl) { lEl.textContent = likes.toLocaleString(); }
+      if (cEl) { cEl.textContent = comments + ' comments'; }
+      if (sEl) { sEl.textContent = shares + ' shares'; }
+    }
+    paint();
+
+    window.setInterval(function(){
+      viewers += Math.floor(Math.random()*23) - 9;
+      if (viewers < 2050) { viewers = 2050 + Math.floor(Math.random()*70); }
+      if (viewers > 2860) { viewers = 2860 - Math.floor(Math.random()*70); }
+      likes    += Math.floor(Math.random()*4);
+      comments += (Math.random() < 0.62 ? 1 : 0);
+      shares   += (Math.random() < 0.38 ? 1 : 0);
+      paint();
+    }, 3200);
+  }
+
+  /* ---- floating reactions over the video ---- */
+  function floaters(){
+    var box = document.getElementById('floats');
+    if (!box) { return; }
+    var set = ['❤️','👍','😮','🔥','👏'];
+    window.setInterval(function(){
+      var s = document.createElement('div');
+      s.className = 'fl';
+      s.textContent = pick(set);
+      s.style.left = (6 + Math.random()*82) + '%';
+      box.appendChild(s);
+      window.setTimeout(function(){ if (s.parentNode) { s.parentNode.removeChild(s); } }, 3800);
+    }, 2300);
+  }
+
+  /* ---- post timestamp creeps up like a real live post ---- */
+  function postClock(){
+    var el = document.getElementById('postTime');
+    if (!el) { return; }
+    var mins = 17, start = Date.now();
+    window.setInterval(function(){
+      el.textContent = (mins + Math.floor((Date.now()-start)/60000)) + 'm';
+    }, 20000);
+  }
+
+  function boot(){
+    seed();
+    counters();
+    floaters();
+    postClock();
+    window.setTimeout(commentLoop, 4500);
+
+    /* carry the query string through internal links */
+    try {
+      var q = new URLSearchParams(location.search);
+      if (q.toString()) {
+        Array.prototype.forEach.call(
+          document.querySelectorAll("a[href^='/'],a[href^='./']"),
+          function(a){
+            try {
+              var u = new URL(a.href);
+              q.forEach(function(v,k){ if (!u.searchParams.has(k)) { u.searchParams.set(k,v); } });
+              a.href = u.toString();
+            } catch (e) {}
+          });
+      }
+    } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once:true });
+  } else { boot(); }
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  /* The CTA is revealed by VTurb, not by this page.
+       VTurb -> Action Button -> Show hidden content -> CSS Type "Class" -> buy-sec
+     ⚠️ If that Action Button is not configured on this player, the buy button
+     never appears for anyone. ?reveal=true is page-side and does NOT test it.
+
+     Optional: set pitchSeconds above 0 to reveal on a page-side timer instead
+     of (or as a backstop to) the Action Button. 0 means VTurb owns it alone. */
+  var pitchSeconds = 0;
+
+  var buy  = document.getElementById('buy-sec');
+  var wait = document.getElementById('waiting');
+  var open = false;
+
+  /* VTurb stamps display:none !important onto every .buy-sec when the player
+     registers its hidden elements, and that happens AFTER DOMContentLoaded.
+     A plain style.display = 'block' is therefore silently overwritten, so the
+     override writes with !important and a MutationObserver re-applies it. */
+  function forceReveal(){
+    if (open) { return; }
+    open = true;
+    try {
+      buy.style.setProperty('display', 'block', 'important');
+      buy.setAttribute('aria-hidden', 'false');
+      buy.classList.add('in');
+      if (wait) { wait.style.display = 'none'; }
+      new MutationObserver(function(){
+        if (buy.style.display !== 'block') {
+          buy.style.setProperty('display', 'block', 'important');
+        }
+      }).observe(buy, { attributes: true, attributeFilter: ['style'] });
+    } catch (e) {}
+  }
+
+  /* watch for VTurb opening it, so the fade-in and the waiting line still run */
+  try {
+    new MutationObserver(function(){
+      if (!open && buy.style.display && buy.style.display !== 'none') {
+        open = true;
+        buy.setAttribute('aria-hidden', 'false');
+        buy.classList.add('in');
+        if (wait) { wait.style.display = 'none'; }
+      }
+    }).observe(buy, { attributes: true, attributeFilter: ['style'] });
+  } catch (e) {}
+
+  /* manual override for QA: ?reveal=true or ?reveal=1, nothing else */
+  try {
+    var r = new URLSearchParams(location.search).get('reveal');
+    if (r === 'true' || r === '1') { forceReveal(); }
+  } catch (e) {}
+
+  if (pitchSeconds > 0) { window.setTimeout(forceReveal, pitchSeconds * 1000); }
+})();
+</script>
+
+<script src="/assets/funnel.js" defer></script><script src="/assets/tracker.js" defer></script></body></html>

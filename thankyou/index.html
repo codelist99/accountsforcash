@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>FBM - Order Complete</title>
+<link rel="icon" type="image/png" href="https://accountsforcash.com/fbm/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* FBM — shared upsell / OTO styles (2014 direct-response look) */
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e8e8e8;color:#222;font-family:"Open Sans",Arial,Helvetica,sans-serif;font-size:17px;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:#e67300}
+
+/* ---------- step bar ---------- */
+.steps{background:#fff;border-bottom:1px solid #cfcfcf;font-family:Arial,Helvetica,sans-serif}
+.steps ol{list-style:none;display:flex;max-width:760px;margin:0 auto}
+.steps li{flex:1;text-align:center;font-size:13px;font-weight:bold;color:#888;padding:9px 4px;border-right:1px solid #e0e0e0;line-height:1.25}
+.steps li:last-child{border-right:0}
+.steps li.done{color:#24942f}
+.steps li.on{background:#1b1f24;color:#fff}
+.steps li span{display:block;font-size:11px;font-weight:normal;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+.wait{background:#d0021b;color:#fff;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:16px;padding:9px 12px;letter-spacing:.3px}
+.wait b{color:#fff200}
+
+/* ---------- page column ---------- */
+.page{max-width:760px;margin:18px auto 0;background:#fff;border:1px solid #cfcfcf;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:22px 34px 34px}
+.logo{display:block;height:40px;width:auto;margin:0 auto 18px}
+h1{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:36px;line-height:1.14;color:#111;text-align:center;letter-spacing:-.5px}
+h1 .red,.red{color:#d0021b}
+.hl{background:#fff200;padding:0 4px}
+.sub{font-size:19px;text-align:center;color:#333;margin:12px auto 20px;max-width:620px}
+.sub b{color:#111}
+
+/* ---------- video ---------- */
+.video{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:4/5;background:#111;border:3px solid #222;border-radius:4px;overflow:hidden}
+.video .play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:#d0021b;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.video .play:after{content:"";position:absolute;left:31px;top:22px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent #fff}
+.video .vlabel{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#ddd;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold}
+.sound{text-align:center;font-size:14px;color:#666;margin-top:8px}
+
+/* ---------- offer ---------- */
+.buy-sec{margin-top:26px;border-top:3px dashed #d0021b;padding-top:22px}
+.punch{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:26px;line-height:1.2;text-align:center;color:#111;margin-bottom:16px}
+.checks{list-style:none;max-width:600px;margin:0 auto 22px;border:1px solid #d6d6d6;background:#fafafa;padding:14px 18px;border-radius:4px}
+.checks li{position:relative;padding:7px 0 7px 34px;font-size:17px;border-bottom:1px dotted #ccc}
+.checks li:last-child{border-bottom:0}
+.checks li:before{content:"\2714";position:absolute;left:2px;top:6px;width:24px;height:24px;line-height:24px;text-align:center;background:#2fae3e;color:#fff;font-size:14px;font-weight:bold;border-radius:3px}
+
+.timer{text-align:center;margin:0 auto 20px}
+.timer p{font-family:Arial,Helvetica,sans-serif;font-weight:bold;color:#d0021b;font-size:16px;margin-bottom:8px}
+.digits{display:inline-flex;align-items:flex-start;gap:6px;font-family:Arial,Helvetica,sans-serif}
+.digits .box{background:#111;color:#fff;font-weight:900;font-size:34px;line-height:1;padding:10px 12px;border-radius:4px;min-width:62px;border-bottom:3px solid #000}
+.digits .box small{display:block;font-size:10px;font-weight:bold;color:#aaa;letter-spacing:1px;margin-top:4px}
+.digits .colon{font-size:34px;font-weight:900;line-height:54px}
+
+.cta{display:block;max-width:600px;margin:0 auto;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(to bottom,#2fae3e 0%,#24942f 100%);border:1px solid #1e7d27;border-bottom:4px solid #176320;border-radius:6px;padding:16px 14px 13px;box-shadow:0 3px 6px rgba(0,0,0,.25);font-family:Arial,Helvetica,sans-serif;animation:tilt 2.6s ease-in-out infinite}
+.cta:hover{background:linear-gradient(to bottom,#34bd44 0%,#279f33 100%)}
+.cta .main{display:block;font-weight:900;font-size:26px;line-height:1.15;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+.cta .main:before{content:"\25B6 ";font-size:.8em}
+.cta .subt{display:block;font-size:14px;margin-top:5px;color:#eaffea;font-weight:bold}
+@keyframes tilt{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-1.5deg)}80%{transform:rotate(1.5deg)}85%{transform:rotate(-1deg)}90%{transform:rotate(1deg)}}
+@media (prefers-reduced-motion:reduce){.cta{animation:none}}
+.secure{text-align:center;font-size:13px;color:#666;margin-top:10px}
+
+.decline{display:block;text-align:center;margin-top:100px;font-size:14px;color:#777;text-decoration:underline;line-height:1.4}
+.decline:hover{color:#d0021b}
+
+/* ---------- thank-you ---------- */
+.ty-check{width:86px;height:86px;margin:6px auto 14px;border-radius:50%;background:#2fae3e;color:#fff;font-size:52px;line-height:86px;text-align:center;font-weight:bold;border-bottom:4px solid #1e7d27}
+.ty-box{max-width:600px;margin:0 auto 24px;border:1px solid #d6d6d6;background:#fafafa;padding:16px 18px;border-radius:4px}
+.ty-box h2{font-family:Arial,Helvetica,sans-serif;font-size:19px;margin-bottom:8px;color:#111}
+.ty-box ol{padding-left:22px}
+.ty-box li{margin:4px 0}
+.cta.static{animation:none}
+.cta.static .main:before{content:""}
+.support{text-align:center;font-size:15px;color:#555;margin-top:20px}
+
+/* ---------- footer ---------- */
+footer{max-width:760px;margin:0 auto 30px;padding:22px 34px;font-size:11.5px;line-height:1.55;color:#777;text-align:center}
+footer p{margin-bottom:10px}
+footer a{color:#666}
+footer .links{font-size:12px}
+
+/* ---------- phone ---------- */
+@media (max-width:600px){
+  body{font-size:16px}
+  .steps li{font-size:11px;padding:7px 2px}
+  .steps li span{font-size:9px;letter-spacing:0}
+  .wait{font-size:14px;padding:8px 10px}
+  .page{margin-top:0;border-left:0;border-right:0;padding:16px 16px 26px}
+  .logo{height:32px;margin-bottom:14px}
+  h1{font-size:27px}
+  .sub{font-size:17px;margin:10px auto 16px}
+  .punch{font-size:21px}
+  .checks{padding:10px 12px}
+  .checks li{font-size:16px}
+  .digits .box{font-size:28px;min-width:54px;padding:8px 10px}
+  .digits .colon{font-size:28px;line-height:46px}
+  .cta .main{font-size:21px}
+  .cta .subt{font-size:12.5px}
+  footer{padding:18px 16px}
+}
+
+</style>
+<style>
+/* Two-step close, ported from the IntelliPay thank-you page. Prefixed tys- so it
+   cannot collide with the .flow/.fstep names already used by other brands. */
+.tys{text-align:left;max-width:600px;margin:26px auto 0}
+.tys-step{display:flex;gap:13px;align-items:flex-start}
+.tys-step+.tys-step{margin-top:19px;padding-top:19px;border-top:1px solid #e2e2e2}
+.tys-n{flex:none;border-radius:50%;display:grid;place-items:center;line-height:1;
+  font-family:Arial,Helvetica,sans-serif}
+.tys-one .tys-n{width:34px;height:34px;font-size:16px;font-weight:800;
+  background:#1e7d27;color:#fff;box-shadow:0 0 0 5px rgba(30,125,39,.13)}
+.tys-two .tys-n{width:27px;height:27px;margin-top:2px;font-size:13px;font-weight:700;
+  background:#fff;color:#1e7d27;border:2px solid #c3ccd6}
+.tys-b{flex:1 1 auto;min-width:0}
+.tys-one h2{font-size:clamp(19px,5vw,23px);line-height:1.22;margin:0;
+  font-family:Arial,Helvetica,sans-serif;font-weight:800;color:#111}
+.tys-one p{font-size:15.5px;color:#333c47;margin:6px 0 0}
+.tys-two h3{font-size:16px;font-weight:700;margin:0;
+  font-family:Arial,Helvetica,sans-serif;color:#111}
+.tys-two p{font-size:13.5px;color:#666;margin:3px 0 0}
+.tys-tel{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:14px;
+  padding:18px 14px;border-radius:11px;text-decoration:none;color:#fff;font-weight:800;
+  font-size:clamp(23px,6.2vw,28px);font-family:Arial,Helvetica,sans-serif;
+  background:#0b7d45;box-shadow:0 9px 22px rgba(11,125,69,.28)}
+.tys-tel:hover{background:#0a6d3c}
+.tys-tel svg{width:24px;height:24px;flex:none;fill:none;stroke:#fff;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round}
+.tys-hrs{font-size:13px;color:#666;margin:9px 0 0;text-align:center}
+/* The page's own .cta is reused as step 2's button, so pull off the centering
+   margin it needs when it sits alone at full width. */
+.tys .cta{margin-top:11px;animation:none}
+</style>
+</head>
+<body>
+<nav class="steps" aria-label="Order progress"><ol><li class="done">&#10004; Order Complete<span>Step 1</span></li><li class="done">Customize Your Account<span>Step 2</span></li><li class="on">Access<span>Step 3</span></li></ol></nav>
+
+<main class="page">
+  <img class="logo" src="https://accountsforcash.com/fbm/assets/logo.png" alt="FBM" width="649" height="120">
+  <div class="ty-check">&#10004;</div>
+  <h1>Your Order Is <span class="red">Complete!</span></h1>
+  <p class="sub">Thank you. Your FBM account and everything you picked up today are waiting for you inside your members area.</p>
+
+  <div class="ty-box">
+    <h2>What you got today:</h2>
+    <ol>
+      <li><b>Your FBM account</b> &mdash; the account assigned to you, set up and run for you</li>
+      <li>Plus any upgrades you said yes to on the last few pages</li>
+    </ol>
+    <p style="margin-top:10px;font-size:15px;color:#555">You will also get a receipt by email from Explodely. Keep it for your records.</p>
+  </div>
+
+  <div class="tys">
+    <div class="tys-step tys-one">
+      <span class="tys-n" aria-hidden="true">1</span>
+      <div class="tys-b">
+        <h2>Call your activation agent</h2>
+        <p>A short call with an agent activates your FBM account and gets you
+           started. Do this first &mdash; it only takes a few minutes.</p>
+        <a class="tys-tel" href="tel:+12034032493">
+          <svg viewBox="0 0 24 24"><path d="M15.5 21a13.5 13.5 0 0 1-12.5-12.5A2.5 2.5 0 0 1 5.5 6h2a1.6 1.6 0 0 1 1.6 1.3l.5 2.3a1.6 1.6 0 0 1-.6 1.6l-1 .8a10.6 10.6 0 0 0 4.2 4.2l.8-1a1.6 1.6 0 0 1 1.6-.6l2.3.5A1.6 1.6 0 0 1 18 16.5v2A2.5 2.5 0 0 1 15.5 21z"/></svg>
+          (203) 403-2493
+        </a>
+        <p class="tys-hrs">Agent hours: 8am&ndash;6pm PT &mdash; call during those hours</p>
+      </div>
+    </div>
+
+    <div class="tys-step tys-two">
+      <span class="tys-n" aria-hidden="true">2</span>
+      <div class="tys-b">
+        <h3>Access the members area</h3>
+        <p>Your account, your progress and your guides.</p>
+        <a class="cta static" href="/fbm/members/">
+        <span class="main">Access Your Members Area</span>
+        <span class="subt">Click here to log in and open your FBM account</span>
+        </a>
+        <p style="margin-top:8px">Sign in with the email address you used at checkout.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="support">Questions? Email us at <a href="/cdn-cgi/l/email-protection#98fefaf5d8e8eaf1f7eaf1ece1ebede8e8f7eaeceeb6e2fdf6fcfdebf3b6fbf7f5"><span class="__cf_email__" data-cfemail="3056525d704042595f42594449434540405f4244461e4a555e5455435b1e535f5d">[email&#160;protected]</span></a> and we&rsquo;ll be glad to help.</p>
+</main>
+
+<footer>
+  <p><strong>Explodely Disclaimer:</strong> Explodely.com is the trusted gateway for <a href="https://accountsforcash.com/fbm/">https://accountsforcash.com/fbm/</a>. Explodely is a trademark of Explodely LLC, a US corporation located at 1317 Edgewater Drive Suite #4648, Orlando FL, 32804, United States and used by permission. Explodely&rsquo;s role as a gateway provider does not constitute an endorsement, approval or review of this product(s) or any claim, statement or opinion used in promotion of this product(s). If you aren&rsquo;t completely satisfied with your purchase, or need order support, please contact Explodely here: <a href="https://help.explodely.com/support/tickets/new">https://help.explodely.com/support/tickets/new</a></p>
+  <p>FBM is a private company. It is <strong>not</strong> a government agency and is not affiliated with, endorsed by, or connected to any government entity, bank or phone carrier.</p>
+  <p>Testimonials, case studies, and examples found on this page are not intended to represent or guarantee that anyone will achieve the same or similar results. Individual experiences are not typical. Some material on this site is dramatized and may use actors, synthetic voices or synthetic imagery. This site is not part of, or endorsed by, Facebook, Google, Snapchat, TikTok or any social media platform in any way.</p>
+  <p>Disclaimer: Nothing on this site is legal, tax or financial advice. The results achieved by any individuals mentioned are not indicative of future results. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited.</p>
+  <p style="margin:14px 0 10px">Copyright <span id="yr">2026</span> - FBM. All Rights Reserved.</p>
+  <div class="links">
+    <a href="https://accountsforcash.com/fbm/disclaimers/privacy.html">Privacy</a> - <a href="https://accountsforcash.com/fbm/disclaimers/terms.html">Terms</a> - <a href="https://accountsforcash.com/fbm/disclaimers/refund-policy.html">Refund Policy</a> - <a href="https://accountsforcash.com/fbm/disclaimers/earnings-disclaimer.html">Earnings Disclaimer</a> - <a href="https://accountsforcash.com/fbm/disclaimers/ftc-compliance.html">FTC Compliance</a> - <a href="https://accountsforcash.com/fbm/disclaimers/support.html">Support</a> - <a href="https://help.explodely.com/support/tickets/new">Order support</a>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* FBM — shared upsell script */
+
+/* ===== OWNER CONFIG: change prices here (whole dollars) ===== */
+var MMM_PRICES = {
+  1: 97, // upsell1 — Done For You Configuration
+  2: 67, // upsell2 — Automation
+  3: 47, // upsell3 — Instant Income
+  4: 97, // upsell4 — High Ticket Payments
+  5: 37  // upsell5 — The Programs To Focus On
+};
+var MMM_REVEAL_FALLBACK_SECONDS = 120; // auto-show the offer if the player never does
+var MMM_COUNTDOWN_SECONDS = 300;       // 5:00, starts when the offer is shown
+/* ============================================================ */
+
+(function () {
+  'use strict';
+  var yr = document.getElementById('yr');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  var n = document.body.getAttribute('data-upsell');
+  if (!n) return; // thank-you page
+
+  // price into every [data-price] slot
+  var price = MMM_PRICES[n];
+  document.querySelectorAll('[data-price]').forEach(function (el) { el.textContent = '$' + price; });
+
+  var sec = document.querySelector('.buy-sec');
+  if (!sec) return;
+
+  /* ---- countdown (only runs once the offer is visible) ---- */
+  var started = false;
+  function startTimer() {
+    if (started) return;
+    started = true;
+    var left = MMM_COUNTDOWN_SECONDS;
+    var m = document.getElementById('tm'), s = document.getElementById('ts');
+    function paint() {
+      var mm = Math.floor(left / 60), ss = left % 60;
+      if (m) m.textContent = (mm < 10 ? '0' : '') + mm;
+      if (s) s.textContent = (ss < 10 ? '0' : '') + ss;
+    }
+    paint();
+    var t = setInterval(function () {
+      left--;
+      if (left <= 0) { left = 0; clearInterval(t); }
+      paint();
+    }, 1000);
+  }
+  function isShown() { return window.getComputedStyle(sec).display !== 'none'; }
+
+  /* ---- reveal ---- */
+  var forced = false;
+  function forceShow() { sec.style.setProperty('display', 'block', 'important'); }
+  function reveal() {
+    forced = true;
+    forceShow();
+    startTimer();
+  }
+
+  // watch the section: start the timer when anything (e.g. the VTurb player) shows it,
+  // and re-show it if something re-hides it after we forced it open
+  new MutationObserver(function () {
+    if (forced && sec.style.getPropertyValue('display') !== 'block') forceShow();
+    if (isShown()) startTimer();
+  }).observe(sec, { attributes: true, attributeFilter: ['style', 'class'] });
+
+  if (/[?&]reveal=true\b/i.test(location.search)) reveal();
+  setTimeout(reveal, MMM_REVEAL_FALLBACK_SECONDS * 1000);
+})();
+
+</script>
+<script src="/assets/funnel.js" defer></script><script src="/assets/tracker.js" defer></script></body>
+</html>

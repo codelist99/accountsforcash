@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "{member.html,**/*.html,public/**}",
+      "maxDuration": 30
+    }
+  },
+  "crons": [{ "path": "/api/cron/email", "schedule": "* * * * *" }],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index?__path=/$1" }
+  ]
+}
