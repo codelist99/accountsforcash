@@ -1,46 +1,46 @@
 {
   "source": "https://accountsforcash.com",
-  "generatedAt": "2026-11-06T22:50:08.158Z",
+  "generatedAt": "2026-11-06T23:50:12.340Z",
   "pages": [
     {
       "source": "/fbm/vsl/?affid=affidhere",
       "target": "index.html",
-      "bytes": 31893
+      "bytes": 30993
     },
     {
       "source": "/fbm/vsl/?affid=affidhere",
       "target": "fbm/vsl/index.html",
-      "bytes": 31893
+      "bytes": 30993
     },
     {
       "source": "/fbm/upsell1/",
       "target": "upsell1/index.html",
-      "bytes": 31325
+      "bytes": 30741
     },
     {
       "source": "/fbm/upsell2/",
       "target": "upsell2/index.html",
-      "bytes": 36621
+      "bytes": 36037
     },
     {
       "source": "/fbm/upsell3/",
       "target": "upsell3/index.html",
-      "bytes": 38312
+      "bytes": 37728
     },
     {
       "source": "/fbm/upsell4/",
       "target": "upsell4/index.html",
-      "bytes": 39014
+      "bytes": 38430
     },
     {
       "source": "/fbm/upsell5/",
       "target": "upsell5/index.html",
-      "bytes": 48493
+      "bytes": 47909
     },
     {
       "source": "/fbm/thank-you/",
       "target": "thankyou/index.html",
-      "bytes": 18979
+      "bytes": 18703
     }
   ]
 }
