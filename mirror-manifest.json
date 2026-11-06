@@ -1,6 +1,6 @@
 {
   "source": "https://accountsforcash.com",
-  "generatedAt": "2026-11-06T22:34:32.350Z",
+  "generatedAt": "2026-11-06T22:50:08.158Z",
   "pages": [
     {
       "source": "/fbm/vsl/?affid=affidhere",
@@ -40,7 +40,7 @@
     {
       "source": "/fbm/thank-you/",
       "target": "thankyou/index.html",
-      "bytes": 16959
+      "bytes": 18979
     }
   ]
 }
